@@ -1,0 +1,29 @@
+{
+  "log": "2020-12-15 11:09:36,800 INFO process_utils.py Spawn:237 Running command: \"/usr/local/factory/py/umpire/server/../../../bin/cros_payload add .json firmware /tmp/shared/20201215030936-it76Tn/chromeos-firmwareupdate_barla_11031.132.0_0x1039\" in /var/db/factory/umpire/temp/tmpCT9jNW\n",
+  "stream": "stderr",
+  "time": "2020-12-15T03:09:36.800486985Z"
+}
+
+{
+  "log": "2020-12-15 11:09:55,263 INFO process_utils.py Spawn:237 Running command: \"/usr/local/factory/py/umpire/server/../../../bin/cros_payload add .json hwid /tmp/shared/20201215030955-TJ3CKk/hwid_v3_bundle_BARLA_2020_08_04_21_33_21_418.sh\" in /var/db/factory/umpire/temp/tmpUWA12k\n",
+  "stream": "stderr",
+  "time": "2020-12-15T03:09:55.26336076Z"
+}
+
+{
+  "log": "2020-12-15 11:10:17,980 INFO process_utils.py Spawn:237 Running command: \"/usr/local/factory/py/umpire/server/../../../bin/cros_payload add .json release_image /tmp/shared/20201215031016-VNqx7x/chromeos_13310.59.0_grunt_recovery_stable-channel_mp-v5.tar.gz\" in /var/db/factory/umpire/temp/tmpV_AoAR\n",
+  "stream": "stderr",
+  "time": "2020-12-15T03:10:17.980448871Z"
+}
+
+{
+  "log": "2020-12-15 11:16:40,565 INFO process_utils.py Spawn:237 Running command: \"/usr/local/factory/py/umpire/server/../../../bin/cros_payload add .json test_image /tmp/shared/20201215031640-c2kLA8/ChromeOS-test-R72-11164.102.0-grunt.tar.xz\" in /var/db/factory/umpire/temp/tmpXDqRv9\n",
+  "stream": "stderr",
+  "time": "2020-12-15T03:16:40.56552116Z"
+}
+
+{
+  "log": "2020-12-15 11:24:45,011 INFO process_utils.py Spawn:237 Running command: \"/usr/local/factory/py/umpire/server/../../../bin/cros_payload add .json toolkit /tmp/shared/20201215032444-7dzT8j/install_factory_toolkit_modrin_FA-20201120_LED_on-off-on--1F_and_TLine.run\" in /var/db/factory/umpire/temp/tmpLEqxoJ\n",
+  "stream": "stderr",
+  "time": "2020-12-15T03:24:45.011495659Z"
+}

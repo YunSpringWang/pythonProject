@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎登陆</title>
+    <link rel="stylesheet" href="/static/bootstrap-4.5.3-dist/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-lg-offset-3">
+            <form action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="user">用户名</label>
+                    <input type="text" id="user" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">密码</label>
+                    <input type="password" id="pwd" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="">验证码</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="valid_code form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <img width="263" height="34" id='code_img' src="/get_validCode_img/" alt="">
+                        </div>
+                    </div>
+                </div>
+                {# 后面加span 错误提示 #}
+                <input type="button" class="btn btn-default login_btn" value="登陆"><span class="error"></span>
+
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="/static/js/jquery-2.1.4.min.js"></script>
+<script>
+    //刷新验证码
+    $('#code_img').click(function () {
+        $(this)[0].src+='?'  //点击验证码后从新访问一次路径，获得新图片
+    })
+
+    // 登陆验证
+    $('.login_btn').click(function () {
+        $.ajax({
+            url:'',
+            type:'post',
+            data:{
+                user:$('#user').val(),
+                pwd:$('#pwd').val(),
+                valid_code:$('.valid_code').val(),
+                csrfmiddlewaretoken:$("[name='csrfmiddlewaretoken']").val()  //token值
+            },
+            success:function (data) {
+                console.log(data)
+                if (data.user){
+                    location.href='/index/'  //js 跳转页面
+                }
+                else{
+                    $('.error').text(data.msg).css({'color':'red', 'margin-left':'20px'})
+                }
+            }
+        })
+
+    })
+
+</script>
+</html>

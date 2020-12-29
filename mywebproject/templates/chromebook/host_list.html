@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% extends "base.html" %}
+    <!-- 载入静态文件 -->
+    {% load static %}
+</head>
+<body>
+<!--body wrapper start-->
+{% block base_content %}
+<!-- 功能 -->
+<div class="row">
+    <div class="col-sm-12">
+        <section class="panel">
+            <header class="panel-heading">
+                HOST INFO Table
+                <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                </span>
+            </header>
+            <div class="panel-body">
+                <table class="table  table-hover general-table">
+                    <!-- 标题行 -->
+                    <thead>
+                    <tr role="row">
+                        <th class="center">
+                            <label class="pos-rel">
+                                <input type="checkbox" class="ace" />
+                                <span class="lbl"></span>
+                            </label>
+                        </th>
+                        <th class="text-center" width="60">ID</th>
+                        <th class="text-center">服务器主机名</th>
+                        <th class="text-center">内网 IP</th>
+                        <th class="text-center">公网 IP</th>
+                        <th class="text-center">端口号</th>
+                        <th class="text-center">广达机种名</th>
+                        <th class="text-center">Google机种名</th>
+                        <th class="text-center">HP机种名</th>
+                        <th class="text-center">用途</th>
+                        <th class="text-center">状态</th>
+                        <th class="text-center">描述</th>
+                        <th class="text-center">添加日期</th>
+                        <th class="text-center">最后更新日期</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% if host_records.object_list %}
+                    {% for each_record in host_records.object_list %}
+                    <tr class="gradeX odd" role="row">
+                        <td class="center">
+                            <label class="pos-rel">
+                                <input type="checkbox" class="ace" />
+                                <span class="lbl"></span>
+                            </label>
+                        </td>
+                        <td class="text-center"
+                            style="vertical-align:middle;">{{ forloop.counter }}
+                        </td>
+                        <td class="text-center"
+                            style="vertical-align:middle;">{{ each_record.hostname }}
+                        </td>
+                        <td class="text-center"
+                            style="vertical-align:middle;">
+                            {% if each_record.inner_ip %}{{ each_record.inner_ip }}{% else %}
+                            暂无{% endif %}
+                        </td>
+                        <td class="text-center"
+                            style="vertical-align:middle;">
+                            {% if each_record.public_ip %}{{ each_record.public_ip }}{% else %}
+                            暂无{% endif %}
+                        </td>
+                        <td class="text-center"
+                            style="vertical-align:middle;">{{ each_record.docker_port }}
+                        </td>
+                        <td class="text-center"
+                            style="vertical-align:middle;">{{ each_record.quanta_project }}
+                        </td>
+                        <td class="text-center"
+                            style="vertical-align:middle;">{{ each_record.google_project }}
+                        </td>
+                        <td class="text-center"
+                            style="vertical-align:middle;">{{ each_record.hp_project }}
+                        </td>
+                        <td class="text-center"
+                            style="vertical-align:middle;">{{ each_record.use_type }}
+                        </td>
+                        <td class="text-center"
+                            style="vertical-align:middle;">{{ each_record.host_port_status }}
+                        </td>          <td class="text-center"
+                            style="vertical-align:middle;">{{ each_record.desc }}
+                        </td>
+                        <td class="text-center"
+                            style="vertical-align:middle;">{{ each_record.add_time }}
+                        </td>
+                        <td class="text-center"
+                            style="vertical-align:middle;">{{ each_record.update_time }}
+                        </td>
+                        <td class="text-center" style="vertical-align:middle;">
+                            <a class="edit" href="javascript:;">Edit</a>
+                            <a class="btn btn-xs"
+                               href="#"
+                               style="background-color: #009688;color: white;">
+                                查看详情
+                            </a>
+                            <a type="button" class="btn btn-xs"
+                               style="background-color: #f05050;color: white;">
+                                远程终端
+                            </a>
+                            <a class="delete" href="javascript:;">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <td class="text-center" colspan="11" style="vertical-align:middle;">暂无记录
+                    </td>
+                    {% endif %}
+
+
+                    </tbody>
+                </table>
+                <div class="panel-footer" style="padding-top: 0; padding-bottom: 0;">
+                    <div class="text-center">
+                        <ul class="pagination" style="margin-top: 10px; margin-bottom: 10px;">
+
+                            <!-- 上一页 -->
+                            {% if host_records.has_previous %}
+                            <li><a href="?{{ host_records.previous_page_number.querystring }}">上一页<span
+                                    class="sr-only"></span></a></li>
+                            <li><a href="?{{ host_records.previous_page_number.querystring }}">&laquo;<span
+                                    class="sr-only"></span></a></li>
+                            {% endif %}
+
+                            <!-- 页码 -->
+                            {% for page in host_records.pages %}
+                            {% if page %}
+                            <!-- 当前页 -->
+                            {% ifequal page host_records.number %}
+                            <li class="active"><a href="?page={{ page }}">{{ page }}<span
+                                    class="sr-only">(current)</span></a></li>
+                            <!-- 其它页 -->
+                            {% else %}
+                            <li><a href="?page={{ page }}">{{ page }}<span
+                                    class="sr-only"></span></a></li>
+                            {% endifequal %}
+                            <!-- 省略页 -->
+                            {% else %}
+                            <li><a href="">...<span class="sr-only"></span></a></li>
+                            {% endif %}
+                            {% endfor %}
+
+                            <!-- 下一页 -->
+                            {% if host_records.has_next %}
+                            <li><a href="?{{ host_records.next_page_number.querystring }}">&raquo;<span
+                                    class="sr-only"></span></a></li>
+                            <li><a href="?{{ host_records.next_page_number.querystring }}">下一页<span
+                                    class="sr-only"></span></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock base_content %}
+<!--body wrapper end-->
+    {% block base_footer_js %}
+<!--script for editable table-->
+
+    {% endblock base_footer_js %}
+</body>
+</html>
